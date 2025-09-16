@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*height: 100vh;*/
+    background-color: #f0f0f0;
+    position: relative;
+    /*overflow: hidden;*/
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    /* Caminho ajustado para a pasta 'imagens' */
+    background-image: url('imagens/fundo_safra_go.jpg');
+    background-size: contain;
+    background-position:center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    filter: brightness(0.5);
+    z-index: 1;
+}
+
+/* O restante do código CSS continua igual */
+
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+.form-container {
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.form-container p {
+    margin: 0 0 5px;
+    font-size: 14px;
+    text-align: left;
+    color: #fff;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #fff;
+    &::placeholder {color: #fff;}
+    box-sizing: border-box;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+
+.enter-btn {
+    background-color: transparent;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    
+}
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+
+
+.no-account {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.no-account a {
+    color: #fff;
+    text-decoration: underline;
+}
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #fff;
+}
+
+.divider .line {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #fff;
+}
+
+.divider .or-text {
+    padding: 0 10px;
+    font-size: 14px;
+}
+.social-btn {
+    display: flex; /* Para alinhar o ícone e o texto lado a lado */
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; /* Fundo branco */
+    color: #fff; /* Texto preto */
+    font-weight: 500;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Borda sutil */
+    border: 1px solid #fff;
+}
+
+.social-btn .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+}
+
+/* Estilos específicos para cada botão (opcional) */
+/* .google-btn { } */
+/* .phone-btn { } */
