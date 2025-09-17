@@ -67,7 +67,7 @@ body {
 
 /* Banner */
 .banner {
-  background: url("img/home.jpg") no-repeat center;
+  background: url("/Projeto.safrago12/imagens/home.jpg") no-repeat center;
   background-size: cover;
   padding: 70px 30px 110px;
   color: white;
