@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  padding-bottom: 70px; /* espaço pra navbar */
+}
+
+/* Cabeçalho */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  height: 60px;
+  max-width: 210px;
+}
+
+.back-btn {
+  background: #4CAF50;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.header h1 {
+  font-size: 18px;
+  color: #4CAF50;
+}
+
+/* Imagem do produto */
+.produto-banner {
+  margin-top: 60px;
+  position: relative;
+  text-align: center;
+}
+
+.produto-banner img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.produto-nome {
+  background: #f1f8e9;
+  color: #3e2723;
+  padding: 8px 15px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Informações */
+.produto-info {
+  padding: 15px;
+}
+
+.produto-info h3 {
+  margin-top: 15px;
+  color: #3e2723;
+}
+
+.vendedor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.vendedor img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Botão de interesse */
+.contato {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.btn-interesse {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Navbar */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #3e2723;
+  padding: 8px 0;
+}
+
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.bottom-nav i {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.bottom-nav .cart i {
+  background: #4CAF50;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 22px;
+}

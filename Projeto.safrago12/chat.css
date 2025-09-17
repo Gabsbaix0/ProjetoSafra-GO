@@ -1,0 +1,133 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #ffffff;
+}
+
+/* ===== Cabeçalho ===== */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  background: #ffffff; /* branco */
+  color: #000;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.back-btn {
+  background: #4CAF50; /* verde */
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-header h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* ===== Área do chat ===== */
+.chat-container {
+  flex: 1;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  background: url("img/fundochat.png") repeat; /* use a imagem de textura bege com legumes */
+  background-size: contain;
+  overflow-y: auto;
+}
+
+/* ===== Input fixo ===== */
+/* ===== Caixa flutuante ===== */
+.chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: fixed;
+  bottom: 70px; /* flutua acima da navbar */
+  width: 100%;
+  background: transparent; /* sem fundo */
+}
+
+.chat-input input {
+  flex: 1;
+  max-width: 80%; /* não ocupar a tela toda */
+  padding: 12px 18px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* sombra para destacar */
+  font-size: 14px;
+}
+
+.send-btn {
+  background: #4CAF50; /* verde */
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #3e2723; /* marrom escuro */
+  padding: 8px 0;
+}
+
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.bottom-nav i {
+  font-size: 20px; /* tamanho dos ícones */
+  margin-bottom: 4px;
+}
+
+.bottom-nav .cart i {
+  background: #4CAF50;
+  padding: 10px;
+  border-radius: 50%;
+  color: white;
+  font-size: 22px;
+}
+
