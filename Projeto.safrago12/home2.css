@@ -67,7 +67,7 @@ body {
 
 /* Banner */
 .banner {
-  background: url("/Projeto.safrago12/imagens/home.jpg") no-repeat center;
+  background: url("imagens/home.jpg") no-repeat center;
   background-size: cover;
   padding: 70px 30px 110px;
   color: white;
@@ -122,6 +122,29 @@ body {
   font-weight: 600;
 }
 
+/* Estilo para os links de categoria */
+/* Estilo para os links de categoria */
+.categorias-bar a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/* Manter a aparência visual original da categoria */
+.categoria {
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Efeito hover para feedback visual */
+.categoria:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
 /* Seções */
 .section-title {
   font-size: 26px;

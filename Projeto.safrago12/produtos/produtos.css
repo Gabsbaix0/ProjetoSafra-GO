@@ -146,3 +146,86 @@ body {
   border-radius: 50%;
   font-size: 22px;
 }
+
+/* Responsividade */
+
+/* Telas pequenas (celulares até 480px) */
+@media (max-width: 480px) {
+  .logo {
+    height: 45px;
+    max-width: 150px;
+  }
+
+  .header h1 {
+    font-size: 16px;
+  }
+
+  .produto-banner img {
+    height: 150px;
+  }
+
+  .btn-interesse {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .vendedor img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bottom-nav i {
+    font-size: 18px;
+  }
+
+  .bottom-nav a {
+    font-size: 10px;
+  }
+}
+
+/* Telas médias (tablets até 768px) */
+@media (max-width: 768px) {
+  .logo {
+    height: 50px;
+    max-width: 180px;
+  }
+
+  .produto-banner img {
+    height: 180px;
+  }
+
+  .btn-interesse {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+}
+
+/* Cartão de produto */
+.produto-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.produto-card img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.produto-card h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+  color: #3e2723;
+}
+
+.produto-card p {
+  color: #4CAF50;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
