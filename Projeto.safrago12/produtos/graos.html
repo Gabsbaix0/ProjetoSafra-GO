@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grãos - SafraGo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="produtos.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <button class="back-btn" onclick="history.back()">←</button>
+    <div class="header-center">
+      <h1>Grãos</h1>
+    </div>
+    <img src="../imagens/logo.png" alt="SafraGo" class="logo">
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <!-- Barra de busca e filtros -->
+    <section class="search-section">
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Buscar grãos">
+      </div>
+      
+      <div class="filters">
+        <button class="filter-btn">Todos</button>
+        <button class="filter-btn">Filtro</button>
+        <button class="filter-btn">Preço</button>
+        <button class="filter-btn">Tipo</button>
+      </div>
+    </section>
+
+    <!-- Lista de produtos -->
+    <section class="product-list">
+      <!-- Arroz -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="../imagens/arroz.png" alt="Arroz">
+        </div>
+        <div class="product-header">
+          <h3>Arroz</h3>
+          <div class="stock">Estoque: 1000</div>
+        </div>
+        <div class="product-details">
+          <div class="packaging-option">
+            <div class="packaging-info">
+              <div class="packaging-type">Saca 50kg</div>
+              <div class="packaging-price">R$ 180,00</div>
+            </div>
+            <div class="min-order">Min: 10</div>
+          </div>
+          <div class="producer">Produtor: Cooperativa Rio Branco - MT</div>
+          <button class="btn-interesse">Tenho Interesse</button>
+        </div>
+      </div>
+
+      <!-- Feijão -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="../imagens/feijao.png" alt="Feijão">
+        </div>
+        <div class="product-header">
+          <h3>Feijão</h3>
+          <div class="stock">Estoque: 700</div>
+        </div>
+        <div class="product-details">
+          <div class="packaging-option">
+            <div class="packaging-info">
+              <div class="packaging-type">Saca 60kg</div>
+              <div class="packaging-price">R$ 250,00</div>
+            </div>
+            <div class="min-order">Min: 8</div>
+          </div>
+          <div class="producer">Produtor: Fazenda Boa Esperança - GO</div>
+          <button class="btn-interesse">Tenho Interesse</button>
+        </div>
+      </div>
+
+      <!-- Lentilha -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="../imagens/lentilha.png" alt="Lentilha">
+        </div>
+        <div class="product-header">
+          <h3>Lentilha</h3>
+          <div class="stock">Estoque: 300</div>
+        </div>
+        <div class="product-details">
+          <div class="packaging-option">
+            <div class="packaging-info">
+              <div class="packaging-type">Saca 25kg</div>
+              <div class="packaging-price">R$ 200,00</div>
+            </div>
+            <div class="min-order">Min: 6</div>
+          </div>
+          <div class="producer">Produtor: AgroVale - RS</div>
+          <button class="btn-interesse">Tenho Interesse</button>
+        </div>
+      </div>
+
+      <!-- Milho -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="../imagens/milho.png" alt="Milho">
+        </div>
+        <div class="product-header">
+          <h3>Milho</h3>
+          <div class="stock">Estoque: 2000</div>
+        </div>
+        <div class="product-details">
+          <div class="packaging-option">
+            <div class="packaging-info">
+              <div class="packaging-type">Saca 60kg</div>
+              <div class="packaging-price">R$ 90,00</div>
+            </div>
+            <div class="min-order">Min: 20</div>
+          </div>
+          <div class="producer">Produtor: Fazenda Campo Verde - PR</div>
+          <button class="btn-interesse">Tenho Interesse</button>
+        </div>
+      </div>
+
+      <!-- Soja -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="../imagens/soja.png" alt="Soja">
+        </div>
+        <div class="product-header">
+          <h3>Soja</h3>
+          <div class="stock">Estoque: 2500</div>
+        </div>
+        <div class="product-details">
+          <div class="packaging-option">
+            <div class="packaging-info">
+              <div class="packaging-type">Saca 60kg</div>
+              <div class="packaging-price">R$ 160,00</div>
+            </div>
+            <div class="min-order">Min: 15</div>
+          </div>
+          <div class="producer">Produtor: Cooperativa AgroSul - MS</div>
+          <button class="btn-interesse">Tenho Interesse</button>
+        </div>
+      </div>
+
+      <!-- Trigo -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="../imagens/trigo.png" alt="Trigo">
+        </div>
+        <div class="product-header">
+          <h3>Trigo</h3>
+          <div class="stock">Estoque: 1200</div>
+        </div>
+        <div class="product-details">
+          <div class="packaging-option">
+            <div class="packaging-info">
+              <div class="packaging-type">Saca 50kg</div>
+              <div class="packaging-price">R$ 140,00</div>
+            </div>
+            <div class="min-order">Min: 12</div>
+          </div>
+          <div class="producer">Produtor: Cooperativa Vale do Trigo - RS</div>
+          <button class="btn-interesse">Tenho Interesse</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Navbar inferior -->
+  <nav class="bottom-nav">
+    <a href="#"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>Pesquisar</span></a>
+    <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
+    <a href="#"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
+    <a href="#"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+  </nav>
+
+  <script src="filtros.js"></script>
+</body>
+</html>

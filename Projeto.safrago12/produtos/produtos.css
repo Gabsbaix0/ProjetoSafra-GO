@@ -229,3 +229,78 @@ body {
   margin-bottom: 10px;
 }
 
+/* Estilo para as seções em formato de cards */
+.produto-info {
+  background: #fff;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.produto-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Ícones nos títulos */
+.produto-info h3::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #4CAF50;
+}
+
+.produto-info:nth-of-type(1) h3::before { content: "\f15c"; } /* Descrição - ícone arquivo */
+.produto-info:nth-of-type(2) h3::before { content: "\f02d"; } /* Info técnica - lista */
+.produto-info:nth-of-type(3) h3::before { content: "\f155"; } /* Preço */
+.produto-info:nth-of-type(4) h3::before { content: "\f466"; } /* Quantidade */
+.produto-info:nth-of-type(5) h3::before { content: "\f017"; } /* Validade */
+.produto-info:nth-of-type(6) h3::before { content: "\f007"; } /* Vendedor */
+.produto-info:nth-of-type(7) h3::before { content: "\f071"; } /* Avisos */
+
+/* Vendedor em card diferenciado */
+.vendedor {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background: #f9fbe7;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.vendedor img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4CAF50;
+}
+
+/* Avisos importantes com destaque */
+.produto-info ul li {
+  margin: 6px 0;
+} 
+
+/* Botão de contato fixo */
+.contato {
+  position: sticky;
+  bottom: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-interesse {
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.btn-interesse:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #388e3c, #1b5e20);
+}
