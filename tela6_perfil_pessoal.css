@@ -1,0 +1,207 @@
+/* Configurações Globais e de Fonte */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.screen-container {
+    max-width: 450px; /* Simula a largura de um celular */
+    margin: auto;
+    background-color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 80px; /* Espaço para o menu inferior */
+}
+
+/* Cabeçalho Superior */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.back-icon {
+    background-color: #2a7e2a;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.header-icon {
+    color: #333;
+    font-size: 24px;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+/* Conteúdo Principal */
+.profile-content {
+    padding: 20px;
+    margin-top: 60px; /* Espaço para o cabeçalho não sobrepor */
+    text-align: center;
+}
+
+/* Foto de Perfil */
+.profile-pic-container {
+    margin-top: 20px; /* Espaço para afastar do cabeçalho */
+    margin-bottom: 10px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    background-color: #2a7e2a;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 60px;
+}
+
+.profile-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 10px 0 30px 0;
+}
+
+/* Estilos do Formulário */
+.profile-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box; /* Garante que padding não afete a largura total */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os campos na mesma linha */
+}
+
+.form-row .form-group {
+    flex: 1; /* Faz os campos dividirem o espaço igualmente */
+}
+
+.form-row .short-input {
+    flex: 0 0 80px; /* Define uma largura fixa para o campo "N°" */
+}
+
+/* Botões */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.btn-save {
+    background-color: #5d4037; /* Marrom escuro */
+    color: white;
+}
+
+.logout-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.logout-section p {
+    color: #888;
+    font-size: 0.9em;
+}
+
+.btn-logout {
+    background-color: #d32f2f; /* Vermelho */
+    color: white;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+
+/* Menu de Navegação Inferior */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #5d4037; /* Marrom escuro */
+    color: #fff;
+    padding: 10px 0;
+    position: fixed; /* Fica fixo na parte de baixo */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 450px;
+    margin: auto;
+    border-top: 1px solid #ddd;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.7em;
+}
+
+.nav-item i {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.nav-item.active-nav {
+    transform: translateY(-15px);
+}
+
+.nav-item.active-nav i {
+    background-color: #2a7e2a; /* Verde */
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border: 4px solid white;
+}
