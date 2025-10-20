@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Completo - SafraGo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="produtos.css">
+</head>
+<body>
+ <header class="header">
+    <button class="menu-btn"><i class="fas fa-bars"></i></button>
+    <div class="logo">
+      <img src="imagens/logo.png" alt="SafraGo" class="logo-icon">
+    </div>
+    <button class="chat-btn"><i class="fas fa-comment-alt"></i></button>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner-safra">
+    <h1 class="banner-text">Caminho da Safra</h1>
+  </section>
+
+  <!-- Busca + Filtros -->
+  <section class="search-section">
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Buscar produtos..." id="searchInput">
+    </div>
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-category="all">Todos</button>
+      <button class="filter-btn" data-category="Grãos">Grãos</button>
+      <button class="filter-btn" data-category="Frutas">Frutas</button>
+      <button class="filter-btn" data-category="Hortaliças">Hortaliças</button>
+    </div>
+  </section>
+
+  <!-- Lista de produtos -->
+  <main class="product-list" id="productList"></main>
+
+  <!-- Navbar inferior -->
+  <nav class="bottom-nav">
+    <a href="../front/home2.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="pesquisa.html"><i class="fa-solid fa-magnifying-glass"></i><span>Pesquisar</span></a>
+    <a href="catalogo.html" class="cart active"><i class="fa-solid fa-basket-shopping"></i><span>Catálogo</span></a>
+    <a href="../favoritos.html"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
+    <a href="../front/tela2_perfil.html"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+  </nav>
+  <script src="../js/filtros.js"></script>
+</body>
+</html>

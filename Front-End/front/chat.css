@@ -1,0 +1,244 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #ffffff;
+}
+
+/* ===== Cabeçalho ===== */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  background: #ffffff; /* branco */
+  color: #000;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.back-btn {
+  background: #4CAF50; /* verde */
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-header h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* ===== Área do chat ===== */
+.chat-container {
+  flex: 1;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  background: url("img/fundochat.png") repeat; /* use a imagem de textura bege com legumes */
+  background-size: contain;
+  overflow-y: auto;
+}
+
+/* ===== Input fixo ===== */
+/* ===== Caixa flutuante ===== */
+.chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: fixed;
+  bottom: 70px; /* flutua acima da navbar */
+  width: 100%;
+  background: transparent; /* sem fundo */
+}
+
+.chat-input input {
+  flex: 1;
+  max-width: 80%; /* não ocupar a tela toda */
+  padding: 15px 18px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* sombra para destacar */
+  font-size: 14px;
+}
+
+.send-btn {
+  background: #4CAF50; /* verde */
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Navbar inferior */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #401D04;
+  padding: 15px 0;
+  z-index: 1000;
+  border-top: 3px solid #2E7D32;
+  box-shadow: 0 -4px 15px rgba(64, 29, 4, 0.2);
+}
+
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #F5FCF8;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.bottom-nav a:hover {
+  color: #FFFFFF;
+  background: rgba(46, 125, 50, 0.3);
+  transform: translateY(-2px);
+}
+
+.bottom-nav a.active {
+  color: #ffffff;
+}
+
+.bottom-nav a.active::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.bottom-nav i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  transition: transform 0.3s ease;
+}
+
+.bottom-nav a:hover i {
+  transform: scale(1.1);
+}
+
+.bottom-nav .cart {
+  color: #ffffff;
+  background: #2E7D32;
+  border-radius: 50%;
+  padding: 12px;
+  margin-top: -20px;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+}
+
+.bottom-nav .cart:hover {
+  background: #2E7D32;
+  transform: translateY(-3px) scale(1.05);
+}
+
+@media (max-width: 480px) {
+ .bottom-nav {
+    padding: 12px 0;
+  }
+  
+  .bottom-nav i {
+    font-size: 20px;
+  }
+  
+  .bottom-nav a {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+
+.chat-container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100vh - 160px); /* ajusta para caber entre header + input + nav */
+  overflow-y: auto;
+}
+
+/* Mensagem base */
+.mensagem {
+  max-width: 70%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Balões */
+.bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Usuário (lado direito) */
+.mensagem.me {
+  align-self: flex-end;
+}
+
+.mensagem.me .bubble {
+  background: #2E7D32;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+/* Agricultor/Outro (lado esquerdo) */
+.mensagem.other {
+  align-self: flex-start;
+}
+
+.mensagem.other .bubble {
+  background: #e5e5ea;
+  color: #000;
+  border-bottom-left-radius: 0;
+}
+
+/* Hora da mensagem */
+.hora {
+  font-size: 11px;
+  color: #555;
+  margin-top: 3px;
+  align-self: flex-end;
+}

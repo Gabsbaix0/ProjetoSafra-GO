@@ -1,0 +1,438 @@
+/* styles-unificados.css - Todos os estilos de login e cadastro */
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap') format('truetype');
+}
+
+/* ===== ESTILOS BASE E LOGIN ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../imagens/fundo_safra_go.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(0.5);
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    width: 90%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+/* ===== ESTILOS DO FORMULÁRIO DE LOGIN/CADASTRO ===== */
+.form-container {
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.form-container p {
+    margin: 0 0 5px;
+    font-size: 14px;
+    text-align: left;
+    color: #fff;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.form-container input::placeholder {
+    color: #fff;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.enter-btn {
+    background-color: transparent;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #fff;
+    border-radius: 20px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+
+.no-account {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.no-account a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #fff;
+}
+
+.divider .line {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #fff;
+}
+
+.divider .or-text {
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+    border: 1px solid #fff;
+}
+
+.social-btn .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* ===== ESTILOS DA SELEÇÃO DE PERFIL ===== */
+.profile-options {
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.option {
+    background-color: transparent;
+    color: #fff;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    display: block;
+    text-decoration: none;
+    border: 1px solid #fff;
+}
+
+.option p {
+    margin: 0;
+}
+
+/* ===== ESTILOS DO FORMULÁRIO DE CADASTRO (TELA 4) ===== */
+/* Header específico para tela4_cadastro_senha */
+.header-tela4 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-icon {
+    width: 150px;
+    margin-right: 10px;
+}
+
+.header-tela4 h1 {
+    font-size: 24px;
+    color: #fff;
+}
+
+.form-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-card h2 {
+    font-size: 18px;
+    color: #008000;
+    margin-bottom: 20px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row input {
+    width: calc(50% - 5px);
+}
+
+.uf-input {
+    width: 80px;
+}
+
+.num-input {
+    width: 80px;
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.arrow-button {
+    width: 50px;
+    height: 50px;
+    background-color: #008000;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.arrow-icon {
+    width: 20px;
+}
+
+.arrow-button-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #004b3a;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.arrow-button:hover, .arrow-button-back:hover {
+    background-color: #003328;
+}
+
+/* ===== ESTILOS DO CADASTRO SENHA (TELA 5) ===== */
+/* Header específico para tela5_cadastro_senha */
+.header-tela5 {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 5px;
+}
+
+.logo-container-tela5 {
+    margin-bottom: 0px;
+}
+
+.logo-tela5 {
+    max-width: 150px;
+}
+
+.nav-container {
+    text-align: left;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.back-link i {
+    background-color: #2a7e2a;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+/* Seta verde específica para tela5 */
+.arrow-button-tela5 {
+    width: 50px;
+    height: 50px;
+    background-color: #2a7e2a;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+}
+
+.arrow-container-tela5 {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+/* ===== ESTILOS DE VALIDAÇÃO E ERRO ===== */
+.mensagem-erro {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    display: block;
+}
+
+.mensagem-erro.geral {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: red;
+    font-size: 1rem;
+}
+
+.campo-invalido {
+    border: 1px solid red;
+}
+
+/* ===== MEDIA QUERIES PARA RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+    
+    .profile-options {
+        padding: 20px;
+    }
+    
+    .form-card {
+        padding: 15px;
+    }
+    
+    .header-tela4 h1 {
+        font-size: 20px;
+    }
+    
+    .logo {
+        width: 150px;
+    }
+    
+    .logo-tela5 {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .form-container, 
+    .profile-options, 
+    .form-card {
+        padding: 15px;
+    }
+    
+    .btn, 
+    .option, 
+    .social-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .back-link {
+        font-size: 1em;
+    }
+}
+
+/* ===== CORREÇÕES DE COMPATIBILIDADE ===== */
+/* Garante que telas específicas tenham overflow hidden quando necessário */
+body.tela-cadastro-senha {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Estilos para header genérico (usado em múltiplas telas) */
+.header-generic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-generic h1 {
+    color: #fff;
+    margin-bottom: 0;
+    font-size: 24px;
+}

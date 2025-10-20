@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisar - SafraGo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="produtos.css">
+  <style>
+    /* Correção para a barra de pesquisa não ficar atrás do header */
+    .main-content {
+      padding-top: 80px; /* Espaço para o header */
+    }
+    
+    .search-hero {
+      margin-top: -60px; /* Compensa o padding do main-content */
+      padding-top: 80px; /* Garante que o conteúdo fique visível */
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <button class="menu-btn" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="logo">
+      <img src="../imagens/logo.png" alt="SafraGo" class="logo-icon">
+    </div>
+    <button class="chat-btn" aria-label="Abrir chat">
+      <i class="fas fa-comment"></i>
+    </button>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <!-- Barra de busca destacada -->
+    <section class="search-hero">
+      <div class="search-container">
+        <div class="search-bar-large">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="O que você está procurando?" id="mainSearchInput">
+          <button class="search-btn" id="searchButton">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filtros rápidos -->
+    <section class="quick-filters">
+      <h3>Buscar por Categoria</h3>
+      <div class="category-filters">
+        <button class="category-filter" data-category="frutas">
+          <i class="fas fa-apple-alt"></i>
+          <span>Frutas</span>
+        </button>
+        <button class="category-filter" data-category="hortalicas">
+          <i class="fas fa-leaf"></i>
+          <span>Hortaliças</span>
+        </button>
+        <button class="category-filter" data-category="graos">
+          <i class="fas fa-seedling"></i>
+          <span>Grãos</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Buscas recentes -->
+    <section class="recent-searches" id="recentSearches" style="display: none;">
+      <div class="section-header">
+        <h3>Buscas Recentes</h3>
+        <button class="clear-recent" id="clearRecent">Limpar</button>
+      </div>
+      <div class="recent-list" id="recentList">
+        <!-- Buscas recentes serão adicionadas dinamicamente -->
+      </div>
+    </section>
+
+    <!-- Produtos e Ofertas -->
+    <section class="featured-products">
+      <h3>Produtos em Oferta</h3>
+      <div class="featured-grid">
+        <!-- Banana -->
+        <div class="featured-card" data-category="frutas">
+          <div class="featured-image">
+            <img src="../imagens/bananas.png" alt="Banana Nanica" loading="lazy">
+          </div>
+          <div class="featured-info">
+            <h4>Banana Nanica</h4>
+            <div class="featured-price">R$ 120,00</div>
+            <div class="featured-producer">Fazenda São João - BA</div>
+            <div class="featured-offer">Oferta da semana</div>
+          </div>
+        </div>
+
+        <!-- Laranja -->
+        <div class="featured-card" data-category="frutas">
+          <div class="featured-image">
+            <img src="../imagens/laranjas.png" alt="Laranja Pera" loading="lazy">
+          </div>
+          <div class="featured-info">
+            <h4>Laranja Pera</h4>
+            <div class="featured-price">R$ 90,00</div>
+            <div class="featured-producer">Fazenda Citrus - SP</div>
+            <div class="featured-offer">Preço especial</div>
+          </div>
+        </div>
+
+        <!-- Maçã -->
+        <div class="featured-card" data-category="frutas">
+          <div class="featured-image">
+            <img src="../imagens/maca.png" alt="Maçã Gala" loading="lazy">
+          </div>
+          <div class="featured-info">
+            <h4>Maçã Gala</h4>
+            <div class="featured-price">R$ 140,00</div>
+            <div class="featured-producer">Cooperativa Vale do Sul - RS</div>
+            <div class="featured-offer">Frete grátis</div>
+          </div>
+        </div>
+
+        <!-- Cenoura -->
+        <div class="featured-card" data-category="hortalicas">
+          <div class="featured-image">
+            <img src="../imagens/cenouras.png" alt="Cenoura" loading="lazy">
+          </div>
+          <div class="featured-info">
+            <h4>Cenoura</h4>
+            <div class="featured-price">R$ 75,00</div>
+            <div class="featured-producer">Fazenda Hortifruti - SP</div>
+            <div class="featured-offer">Promoção</div>
+          </div>
+        </div>
+
+        <!-- Arroz -->
+        <div class="featured-card" data-category="graos">
+          <div class="featured-image">
+            <img src="../imagens/arroz.jpg" alt="Arroz Integral" loading="lazy">
+          </div>
+          <div class="featured-info">
+            <h4>Arroz Integral</h4>
+            <div class="featured-price">R$ 180,00</div>
+            <div class="featured-producer">Cooperativa Rio Branco - MT</div>
+            <div class="featured-offer">Desconto à vista</div>
+          </div>
+        </div>
+
+        <!-- Feijão -->
+        <div class="featured-card" data-category="graos">
+          <div class="featured-image">
+            <img src="../imagens/feijão.png" alt="Feijão Carioca" loading="lazy">
+          </div>
+          <div class="featured-info">
+            <h4>Feijão Carioca</h4>
+            <div class="featured-price">R$ 250,00</div>
+            <div class="featured-producer">Fazenda Boa Esperança - GO</div>
+            <div class="featured-offer">Oferta exclusiva</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resultados da busca (inicialmente escondido) -->
+    <section class="search-results" id="searchResults" style="display: none;">
+      <div class="results-header">
+        <h3 id="resultsTitle">Resultados da Busca</h3>
+        <div class="results-count" id="resultsCount"></div>
+      </div>
+      
+      <div class="results-filters">
+        <select id="sortSelect">
+          <option value="relevance">Ordenar por: Relevância</option>
+          <option value="price-asc">Ordenar por: Preço Menor</option>
+          <option value="price-desc">Ordenar por: Preço Maior</option>
+          <option value="name">Ordenar por: Nome</option>
+        </select>
+        
+        <div class="filter-toggle" id="filterToggle">
+          <i class="fas fa-filter"></i>
+          <span>Filtrar</span>
+        </div>
+      </div>
+
+      <div class="results-container" id="resultsContainer">
+        <!-- Resultados serão carregados aqui -->
+      </div>
+
+      <div class="empty-results" id="emptyResults" style="display: none;">
+        <i class="fas fa-search"></i>
+        <h3>Nenhum produto encontrado</h3>
+        <p>Tente ajustar os termos da busca ou explore nossas categorias</p>
+        <button class="btn-primary" id="exploreCategories">Explorar Categorias</button>
+      </div>
+    </section>
+  </main>
+  
+  <nav class="bottom-nav">
+    <a href="../front/home2.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="pesquisa.html"><i class="fa-solid fa-magnifying-glass"></i><span>Pesquisar</span></a>
+    <a href="catalogo.html" class="cart active"><i class="fa-solid fa-basket-shopping"></i><span>Catálogo</span></a>
+    <a href="../favoritos.html"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
+    <a href="../front/tela2_perfil.html"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+  </nav>
+
+  <!-- Modal de filtros -->
+  <div class="filter-modal" id="filterModal">
+    <div class="filter-content">
+      <div class="filter-header">
+        <h3>Filtrar Produtos</h3>
+        <button class="close-filter" id="closeFilter">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="filter-options">
+        <div class="filter-group">
+          <h4>Categoria</h4>
+          <div class="filter-checkboxes">
+            <label class="filter-checkbox">
+              <input type="checkbox" name="category" value="frutas" checked>
+              <span class="checkmark"></span>
+              Frutas
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" name="category" value="hortalicas" checked>
+              <span class="checkmark"></span>
+              Hortaliças
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" name="category" value="graos" checked>
+              <span class="checkmark"></span>
+              Grãos
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Preço</h4>
+          <div class="price-range">
+            <div class="price-inputs">
+              <input type="number" id="minPrice" placeholder="Mínimo" min="0">
+              <span>até</span>
+              <input type="number" id="maxPrice" placeholder="Máximo" min="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Estado do Produtor</h4>
+          <select id="stateFilter">
+            <option value="">Todos os estados</option>
+            <option value="GO">Goiás</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="DF">Distrito Federal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn-secondary" id="resetFilters">Limpar Filtros</button>
+        <button class="btn-primary" id="applyFilters">Aplicar Filtros</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/filtros.js"></script>
+</body>
+</html>
