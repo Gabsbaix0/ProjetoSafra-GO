@@ -150,7 +150,9 @@ router.post('/forgot-password', async (req, res) => {
 
         // 4. Montar o link de redefinição
         //    (MUDE '127.0.0.1:5500' se o seu frontend rodar em outro lugar)
-        const resetLink = `http://127.0.0.1:5500/redefinir-senha.html?token=${token}`;
+        const resetLink = `http://127.0.0.1:5500/Front-end/front/redefinir-senha.html?token=${token}`;
+        // teste ok!!
+        console.log('--- LINK DE REDEFINIÇÃO (TESTE): ---', resetLink);
 
         // 5. Configurar e enviar o email
         await transporter.sendMail({
