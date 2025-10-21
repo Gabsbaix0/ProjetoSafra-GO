@@ -182,4 +182,42 @@ router.post('/forgot-password', async (req, res) => {
     }
 });
 
+// ROTA 2: SALVAR A NOVA SENHA (O usuário clicou no link)
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { token, novaSenha } = req.body;
+
+        if (!token || !novaSenha) {
+            return res.status(400).json({ mensagem: 'Token e nova senha são obrigatórios.' });
+        }
+
+        // 1. Buscar o usuário PELO TOKEN
+        //    (Esta é a Função 2 que você adicionou no Model)
+        const usuario = await UsuarioModel.buscarPorTokenReset(token);
+
+        // 2. Validar o Token
+        if (!usuario) {
+            return res.status(400).json({ mensagem: 'Token inválido. Solicite um novo link.' });
+        }
+
+        // 3. Validar a Expiração do Token
+        //    (Compara a data de expiração [no futuro] com a data de agora)
+        if (usuario.reset_password_expires < new Date()) {
+            return res.status(400).json({ mensagem: 'Token expirado. Solicite um novo link.' });
+        }
+
+        // 4. Tudo certo! Hashear a nova senha
+        const senhaHash = await bcrypt.hash(novaSenha, 10);
+
+        // 5. Atualizar a senha no DB e limpar o token
+        //    (Esta é a Função 3 que você adicionou no Model)
+        await UsuarioModel.atualizarSenha(usuario.id_usuario, senhaHash);
+
+        res.json({ mensagem: 'Senha atualizada com sucesso! Você já pode fazer login.' });
+
+    } catch (erro) {
+        console.error('Erro no /reset-password:', erro);
+        res.status(500).json({ mensagem: 'Ocorreu um erro no servidor. Tente novamente.' });
+    }
+});
 module.exports = router;
