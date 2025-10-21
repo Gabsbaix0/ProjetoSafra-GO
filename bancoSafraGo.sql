@@ -17,6 +17,11 @@ CREATE TABLE usuario (
     PRIMARY KEY (id_usuario)
 ) ENGINE=InnoDB;
 
+-- atualizar a tabela usuario para armazernar o token
+ALTER TABLE usuario
+ADD COLUMN reset_password_token VARCHAR(255) NULL DEFAULT NULL,
+ADD COLUMN reset_password_expires DATETIME NULL DEFAULT NULL;
+
 -- Tabela de Comprador (Relação 1:1 com Usuario - fk_usuario é PK e FK)
 CREATE TABLE comprador (
     fk_usuario INTEGER NOT NULL, -- É a chave primária (PK) e estrangeira (FK)

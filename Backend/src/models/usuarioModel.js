@@ -62,6 +62,41 @@ async function buscarPorEmail(email) {
     return usuarios[0]; // retorna objeto com senha hash incluída
 }
 
+// funções para reset de senha via token 
+// Função 1: Salva o token no usuário
+async function salvarTokenReset(idUsuario, token, dataExpiracao) {
+    try {
+        const sql = 'UPDATE usuario SET reset_password_token = ?, reset_password_expires = ? WHERE id_usuario = ?';
+        await db.query(sql, [token, dataExpiracao, idUsuario]);
+    } catch (erro) {
+        console.error('Erro ao salvar token de reset:', erro);
+        throw erro;
+    }
+}
+
+// Função 2: Busca um usuário pelo token (e não pelo email)
+async function buscarPorTokenReset(token) {
+    try {
+        const sql = 'SELECT * FROM usuario WHERE reset_password_token = ?';
+        const [rows] = await db.query(sql, [token]);
+        return rows[0]; // Retorna o usuário ou undefined
+    } catch (erro) {
+        console.error('Erro ao buscar por token de reset:', erro);
+        throw erro;
+    }
+}
+
+// Função 3: Atualiza a senha (e limpa o token)
+async function atualizarSenha(idUsuario, novaSenhaHash) {
+    try {
+        const sql = 'UPDATE usuario SET senha = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id_usuario = ?';
+        await db.query(sql, [novaSenhaHash, idUsuario]);
+    } catch (erro) {
+        console.error('Erro ao atualizar senha:', erro);
+        throw erro;
+    }
+}
+
 module.exports = {
     criar,
     buscarTodos,

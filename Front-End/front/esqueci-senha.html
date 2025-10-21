@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-lcs.css">
+    <title>SafraGo - Esqueci a Senha</title>
+    <style>
+        /* Estilo básico para centralizar */
+        body { font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; }
+        div { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <div class="logo-container">
+            <img src="../imagens/logo_safra_go.png" alt="Logo SafraGo" class="logo">
+        <h2>Esqueceu sua senha?</h2>
+        <p>Não se preocupe. Digite seu email abaixo e enviaremos um link para você redefinir sua senha.</p>
+        
+        <form id="forgotForm">
+            <label for="email">Email:</label>
+            <br>
+            <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+            <br><br>
+            <button type="submit" id="btnEnviar">Enviar Link</button>
+        </form>
+        
+        <p id="message" style="display: none;"></p>
+        
+        <br>
+        <a href="tela1_login.html">Voltar para o Login</a>
+    </div>
+
+    <script src="../js/esqueci.js"></script>
+</body>
+</html>

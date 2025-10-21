@@ -13,67 +13,66 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    loginBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        
-        const email = emailInput.value;
-        const senha = senhaInput.value;
+    // Em: login.js
+loginBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    
+    const email = emailInput.value;
+    const senha = senhaInput.value;
 
-        errorMessage.style.display = 'none';
-        loginBtn.textContent = 'Entrando...';
-        loginBtn.disabled = true;
+    errorMessage.style.display = 'none';
+    loginBtn.textContent = 'Entrando...';
+    loginBtn.disabled = true;
 
-        try {
-            const response = await fetch(`${API_URL}/api/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, senha }),
-            });
+    try {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, senha }),
+        });
 
-            if (!response.ok) {
-                const texto = await response.text();  // vê o que veio (HTML de erro, etc)
-                console.error('Resposta não ok:', texto);
-                throw new Error('Erro na requisição');
-}
-            
-            const data = await response.json();
+        // 1. Lê o JSON da resposta (seja sucesso ou erro)
+        const data = await response.json();
 
-            if (response.ok) {
-                // Login bem-sucedido
-                const { id_usuario, nome, tipo_usuario } = data.usuario;
-                
-                // Armazenar dados na sessão/localStorage
-                localStorage.setItem('user_id', id_usuario);
-                localStorage.setItem('user_name', nome);
-                localStorage.setItem('user_type', tipo_usuario);
-                localStorage.setItem('usuario', JSON.stringify(data.usuario));
-                
-                // Redirecionar baseado no tipo de usuário
-                if (tipo_usuario === 'P') {
-                    window.location.href = 'tela7_perfil_vendedor.html'; 
-                } else if (tipo_usuario === 'C') {
-                    window.location.href = 'home2.html'; 
-                } else {
-                    console.warn('Tipo de usuário desconhecido:', tipo_usuario);
-                    window.location.href = 'home2.html'; 
-                }
-
-            } else {
-                errorMessage.textContent = data.erro || 'Ocorreu um erro no login. Tente novamente.';
-                errorMessage.style.display = 'block';
-            }
-
-        } catch (error) {
-            console.error('Erro de rede ou servidor:', error);
-            errorMessage.textContent = 'Falha na comunicação com o servidor. Verifique a conexão.';
-            errorMessage.style.display = 'block';
-        } finally {
-            loginBtn.textContent = 'Entrar';
-            loginBtn.disabled = false;
+        // 2. Verifica se a resposta NÃO foi OK
+        if (!response.ok) {
+            // 3. Lança um erro com a MENSAGEM REAL do servidor
+            throw new Error(data.mensagem || 'Erro desconhecido do servidor');
         }
-    });
+
+        // 4. Salva o TOKEN 
+        localStorage.setItem('token', data.token); 
+        // Salva os dados do usuário
+        localStorage.setItem('usuario', JSON.stringify(data.usuario));
+
+        const { id_usuario, nome, tipo_usuario } = data.usuario;
+        localStorage.setItem('user_id', id_usuario);
+        localStorage.setItem('user_name', nome);
+        localStorage.setItem('user_type', tipo_usuario);
+        
+        // 5. Redireciona 
+        if (tipo_usuario === 'P') {
+            window.location.href = 'tela7_perfil_vendedor.html'; 
+        } else if (tipo_usuario === 'C') {
+            window.location.href = 'home2.html'; 
+        } else {
+            console.warn('Tipo de usuário desconhecido:', tipo_usuario);
+            window.location.href = 'home2.html'; 
+        }
+
+    } catch (error) {
+        // 6. O CATCH agora recebe a mensagem de erro correta
+        console.error('Erro de login:', error.message);
+        // 7. Exibe a MENSAGEM na tela (ex: "Email ou senha inválidos.")
+        errorMessage.textContent = error.message;
+        errorMessage.style.display = 'block';
+    } finally {
+        loginBtn.textContent = 'Entrar';
+        loginBtn.disabled = false;
+    }
+});
 
     // Enter para fazer login
     document.addEventListener('keypress', function(event) {
