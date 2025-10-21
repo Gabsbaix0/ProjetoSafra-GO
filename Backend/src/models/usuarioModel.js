@@ -104,4 +104,7 @@ module.exports = {
     atualizar,
     deletar,
     buscarPorEmail, // usar no authRoutes
+    salvarTokenReset,     // <-
+    buscarPorTokenReset,  // <-
+    atualizarSenha  // <-
 };
