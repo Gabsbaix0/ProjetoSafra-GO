@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resetContainer.innerHTML = `
                 <h2 style="color: green;">Senha atualizada com sucesso!</h2>
                 <p>${data.mensagem}</p>
-                <a href="login.html">Ir para o Login</a>
+                <a href="tela1_login.html">Ir para o Login</a>
             `;
 
         } catch (error) {
@@ -79,3 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+//troca de senhas
+// antiga: $2b$10$vtgDDf/SJh32LT6oIMnYX.DkQqxp9Vq6FtWVD2.6bD0FDoxFb.Mwa
+// nova: $2b$10$sYqarSeBaIm.PSvz2SSjKeQhcop3AEyl9mq9v1tjaQ3qaCE3Wb6eO
