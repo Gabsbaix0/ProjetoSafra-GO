@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafraGo - Definir Senha</title>
+  <link rel="stylesheet" href="style-lcs.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <header class="header-tela5">
+      <div class="logo-container-tela5">
+        <img src="../imagens/logo.png" alt="SafraGo" class="logo-tela5">
+      </div>
+      <div class="nav-container">
+        <a href="cadastro_pessoal.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+          <span>Cadastro</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="form-card">
+      <h2>Definir senha</h2>
+      <form id="formSenha">
+        <input type="password" id="senha" placeholder="Senha" required minlength="6">
+        <input type="password" id="confirmarSenha" placeholder="Digite a senha novamente" required>
+        <div id="msg" style="margin: 10px 0; text-align: center;"></div>
+        <div class="arrow-container-tela5">
+          <button type="submit" class="arrow-button-tela5">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 🔹 EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("D00Vedsq-Hfp3cX17");
+    })();
+  </script>
+
+  <!-- 🔹 Firebase + Script -->
+  <script type="module" src="../js/firebaseConfig.js"></script>
+  <script type="module" src="../js/cadastro.senha.js"></script>
+</body>
+</html>

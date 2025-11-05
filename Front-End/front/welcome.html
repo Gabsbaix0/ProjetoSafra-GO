@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo - SafraGo</title>
+  <link rel="stylesheet" href="style-lcs.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Fundo com gradiente dinâmico e suave */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #b6e2a1, #e1f7d5, #f5fff6);
+      background-size: 300% 300%;
+      animation: moveBackground 10s ease-in-out infinite;
+      font-family: 'Poppins', sans-serif;
+      color: #1b5e20;
+      overflow: hidden;
+      transition: opacity 1s ease-in-out;
+    }
+
+    @keyframes moveBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Logo flutuante com leve brilho */
+    .logo {
+      width: 250px;
+      animation: float 3s ease-in-out infinite, fadeIn 1.5s ease forwards;
+      filter: drop-shadow(0 0 15px rgba(46, 125, 50, 0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Textos principais */
+    h1 {
+      font-size: 2.2rem;
+      margin-top: 25px;
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards 0.5s;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #2e7d32;
+      margin: 6px 0;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 1.8s ease forwards 1s;
+    }
+
+    .slogan {
+      font-style: italic;
+      font-weight: 500;
+      color: #388e3c;
+      opacity: 0;
+      animation: fadeUp 2s ease forwards 1.5s;
+    }
+
+    /* Loader circular moderno */
+    .loader {
+      margin-top: 35px;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 6px solid rgba(46, 125, 50, 0.15);
+      border-top-color: #2e7d32;
+      animation: spin 1.3s linear infinite, fadeUp 2s ease forwards 2s;
+    }
+
+    /* Animações */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Transição suave de saída */
+    body.fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <img src="../imagens/logo.png" alt="SafraGo" class="logo">
+  <h1 id="welcomeMsg">Bem-vindo(a)!</h1>
+  <p>Estamos felizes em te ver por aqui 🌱</p>
+  <p class="slogan">Cultivando conexões, colhendo oportunidades...</p>
+  <div class="loader"></div>
+
+  <script type="module">
+    import { auth } from "../js/firebaseConfig.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const db = getFirestore();
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        let nome = user.displayName;
+
+        // 🔍 Busca o nome real no Firestore
+        if (!nome) {
+          try {
+            const userRef = doc(db, "usuarios", user.uid);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+              nome = userSnap.data().nome;
+            } else {
+              nome = user.email.split('@')[0];
+            }
+          } catch (err) {
+            console.error("Erro ao buscar nome:", err);
+            nome = user.email.split('@')[0];
+          }
+        }
+
+        document.getElementById("welcomeMsg").textContent = `Bem-vindo(a), ${nome}!`;
+
+        // ⏳ Mostra animação e depois redireciona com transição suave
+        setTimeout(() => {
+          document.body.classList.add("fade-out");
+          setTimeout(() => {
+            window.location.href = "home.html";
+          }, 1000);
+        }, 3500);
+
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+</html>

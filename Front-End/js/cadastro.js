@@ -1,155 +1,135 @@
-document.addEventListener('DOMContentLoaded', function () {
-    configurarCadastro();
-    configurarBuscaCEP();
-});
+// js/cadastro.js
 
-function configurarCadastro() {
-    const btnAvancar = document.querySelector('.arrow-button');
+// Espera o carregamento completo do conteúdo da página antes de executar o script
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (btnAvancar) {
-        btnAvancar.addEventListener('click', validarEAvancar);
-    }
+  // Obtém o formulário principal de cadastro pelo ID
+  const form = document.getElementById("formCadastroPessoal");
 
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            validarEAvancar();
-        }
+  // 🔹 Captura os campos que terão máscaras aplicadas (formatação automática)
+  const cpfInput = document.getElementById("cpf");
+  const telefoneInput = document.getElementById("telefone");
+  const cepInput = document.getElementById("cep");
+
+  // =====================================================
+  // 🧩 MÁSCARA DE CPF (formata automaticamente enquanto digita)
+  // =====================================================
+  if (cpfInput) {
+    cpfInput.addEventListener("input", (e) => {
+      // Remove qualquer caractere que não seja número
+      let value = e.target.value.replace(/\D/g, '');
+      // Se o valor tiver até 11 dígitos (limite do CPF)
+      if (value.length <= 11) {
+        // Adiciona pontos e traço conforme o formato do CPF (XXX.XXX.XXX-XX)
+        value = value.replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        // Atualiza o campo com o valor formatado
+        e.target.value = value;
+      }
     });
-}
+  }
 
-function validarEAvancar() {
-    limparErros();
+  // =====================================================
+  // 📞 MÁSCARA DE TELEFONE (formata para padrão brasileiro)
+  // =====================================================
+  if (telefoneInput) {
+    telefoneInput.addEventListener("input", (e) => {
+      // Remove tudo que não for número
+      let value = e.target.value.replace(/\D/g, '');
+      // Se tiver até 11 dígitos (DDD + número)
+      if (value.length <= 11) {
+        // Aplica máscara: (XX) XXXXX-XXXX
+        value = value.replace(/(\d{2})(\d)/, '($1) $2')
+          .replace(/(\d{5})(\d)/, '$1-$2');
+        e.target.value = value;
+      }
+    });
+  }
 
-    const dados = {
-        nome: document.getElementById('nome')?.value.trim(),
-        sobrenome: document.getElementById('sobrenome')?.value.trim(),
-        cpf: document.getElementById('cpf')?.value.trim(),
-        email: document.getElementById('email')?.value.trim(),
-        telefone: document.getElementById('telefone')?.value.trim(),
-        tipo_usuario: getTipoUsuarioFromURL()
-    };
+  // =====================================================
+  // 🏠 MÁSCARA DE CEP + BUSCA AUTOMÁTICA DE ENDEREÇO
+  // =====================================================
+  if (cepInput) {
+    cepInput.addEventListener("input", async (e) => {
+      // Remove caracteres não numéricos
+      let value = e.target.value.replace(/\D/g, '');
+      // Formata o CEP como XXXXX-XXX
+      if (value.length <= 8) {
+        value = value.replace(/(\d{5})(\d)/, '$1-$2');
+        e.target.value = value;
+      }
 
-    let erro = false;
-
-    if (!dados.nome) {
-        mostrarErro('nome', 'Nome é obrigatório.');
-        erro = true;
-    } else if (dados.nome.length < 2) {
-        mostrarErro('nome', 'Nome deve ter pelo menos 2 caracteres.');
-        erro = true;
-    }
-
-    if (!dados.sobrenome) {
-        mostrarErro('sobrenome', 'Sobrenome é obrigatório.');
-        erro = true;
-    }
-
-    if (!dados.email) {
-        mostrarErro('email', 'E-mail é obrigatório.');
-        erro = true;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email)) {
-        mostrarErro('email', 'E-mail inválido.');
-        erro = true;
-    }
-
-    const cpfNumeros = dados.cpf.replace(/\D/g, '');
-    if (!dados.cpf) {
-        mostrarErro('cpf', 'CPF é obrigatório.');
-        erro = true;
-    } else if (cpfNumeros.length !== 11) {
-        mostrarErro('cpf', 'CPF deve conter 11 dígitos numéricos.');
-        erro = true;
-    }
-
-    const telefoneNumeros = dados.telefone.replace(/\D/g, '');
-    if (!dados.telefone) {
-        mostrarErro('telefone', 'Telefone é obrigatório.');
-        erro = true;
-    } else if (telefoneNumeros.length < 10) {
-        mostrarErro('telefone', 'Telefone deve conter ao menos 10 dígitos.');
-        erro = true;
-    }
-
-    if (erro) return;
-
-    salvarDadosTemporarios(dados);
-    window.location.href = 'tela4_cadastro_senha.html';
-}
-
-function salvarDadosTemporarios(dados) {
-    const dadosCompletos = {
-        ...dados,
-        cep: document.getElementById('cep')?.value || '',
-        endereco: document.getElementById('endereco')?.value || '',
-        numero: document.getElementById('numero')?.value || '',
-        bairro: document.getElementById('bairro')?.value || '',
-        cidade: document.getElementById('cidade')?.value || '',
-        uf: document.getElementById('uf')?.value || '',
-        complemento: document.getElementById('complemento')?.value || ''
-    };
-
-    localStorage.setItem('dadosCadastroTemporarios', JSON.stringify(dadosCompletos));
-}
-
-function getTipoUsuarioFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tipo = urlParams.get('tipo');
-    return tipo === 'produtor' ? 'P' : 'C';
-}
-
-function configurarBuscaCEP() {
-    const cepInput = document.getElementById('cep');
-    if (cepInput) {
-        cepInput.addEventListener('blur', buscarCEP);
-    }
-}
-
-async function buscarCEP() {
-    limparErros();
-
-    const cepInput = document.getElementById('cep');
-    const cep = cepInput.value.replace(/\D/g, '');
-
-    if (cep.length === 8) {
+      // 🔍 Quando o CEP tiver 8 dígitos, busca automaticamente o endereço na API ViaCEP
+      if (value.replace(/\D/g, '').length === 8) {
         try {
-            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-            const endereco = await response.json();
+          // Faz a requisição à API do ViaCEP
+          const response = await fetch(`https://viacep.com.br/ws/${value.replace(/\D/g, '')}/json/`);
+          const data = await response.json();
 
-            if (!endereco.erro) {
-                document.getElementById('endereco').value = endereco.logradouro || '';
-                document.getElementById('bairro').value = endereco.bairro || '';
-                document.getElementById('cidade').value = endereco.localidade || '';
-                document.getElementById('uf').value = endereco.uf || '';
-            } else {
-                mostrarErro('cep', 'CEP não encontrado.');
-            }
+          // Se o CEP for válido (sem erro)
+          if (!data.erro) {
+            // Preenche automaticamente os campos de endereço
+            document.getElementById("endereco").value = data.logradouro || '';
+            document.getElementById("bairro").value = data.bairro || '';
+            document.getElementById("cidade").value = data.localidade || '';
+            document.getElementById("uf").value = data.uf || '';
+          }
         } catch (error) {
-            console.error('Erro ao buscar CEP:', error);
-            mostrarErro('cep', 'Erro ao buscar o CEP. Verifique sua conexão.');
+          // Caso a API falhe ou o CEP seja inválido
+          console.error("Erro ao buscar CEP:", error);
         }
+      }
+    });
+  }
+  // 🔚 Fim das máscaras
+
+  // =====================================================
+  // 🧾 ENVIO DO FORMULÁRIO (CADASTRO)
+  // =====================================================
+  form.addEventListener("submit", (e) => {
+    // Evita o comportamento padrão do formulário (recarregar a página)
+    e.preventDefault();
+
+    // Captura os valores dos campos e remove espaços extras
+    const nome = document.getElementById("nome").value.trim();
+    const sobrenome = document.getElementById("sobrenome").value.trim();
+    const cpf = document.getElementById("cpf").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const cep = document.getElementById("cep").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const uf = document.getElementById("uf").value.trim();
+    const endereco = document.getElementById("endereco").value.trim();
+    const numero = document.getElementById("numero").value.trim();
+    const bairro = document.getElementById("bairro").value.trim();
+    const complemento = document.getElementById("complemento").value.trim();
+
+    // 🔒 Verifica se os campos obrigatórios estão preenchidos
+    if (!nome || !cpf || !email) {
+      alert("Preencha os campos obrigatórios: Nome, CPF e E-mail!");
+      return;
     }
-}
 
-function mostrarErro(idCampo, mensagem) {
-    const campo = document.getElementById(idCampo);
-    if (!campo) return;
+    // Cria um objeto com todos os dados do usuário
+    const userData = {
+      nome: `${nome} ${sobrenome}`.trim(),
+      cpf_cnpj: cpf,
+      email,
+      telefone,
+      cep,
+      cidade,
+      uf,
+      endereco,
+      numero,
+      bairro,
+      complemento
+    };
 
-    const erroId = idCampo + '-erro';
-    let erroSpan = document.getElementById(erroId);
+    // 🧠 Armazena temporariamente os dados no navegador (localStorage)
+    localStorage.setItem("usuarioDados", JSON.stringify(userData));
 
-    if (!erroSpan) {
-        erroSpan = document.createElement('span');
-        erroSpan.id = erroId;
-        erroSpan.className = 'mensagem-erro';
-        campo.parentNode.insertBefore(erroSpan, campo.nextSibling);
-    }
-
-    erroSpan.textContent = mensagem;
-    campo.classList.add('campo-invalido');
-}
-
-function limparErros() {
-    document.querySelectorAll('.mensagem-erro').forEach(el => el.remove());
-    document.querySelectorAll('.campo-invalido').forEach(el => el.classList.remove('campo-invalido'));
-}
+    // 👉 Redireciona para a próxima etapa do cadastro (definir senha)
+    window.location.href = "cadastro_senha.html";
+  });
+});

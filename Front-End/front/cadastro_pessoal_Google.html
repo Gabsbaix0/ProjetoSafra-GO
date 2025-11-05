@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro Google - SafraGo </title>
+  <link rel="stylesheet" href="style-lcs.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <header class="header">
+      <a href="login.html" class="arrow-button-back">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <div class="header-content">
+        <h1>Cadastro</h1>
+      </div>
+    </header>
+
+    <div class="form-card">
+      <h2>Dados Pessoais</h2>
+
+      <form id="formCadastroGoogle">
+        <input type="text" id="nome" placeholder="Primeiro Nome" required>
+        <input type="text" id="sobrenome" placeholder="Sobrenome">
+        <input type="text" id="cpf" placeholder="CPF" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <input type="tel" id="telefone" placeholder="Telefone">
+        <input type="text" id="cep" placeholder="CEP">
+
+        <div class="row">
+          <input type="text" id="cidade" placeholder="Cidade">
+          <input type="text" id="uf" placeholder="UF" class="uf-input">
+        </div>
+
+        <div class="row">
+          <input type="text" id="endereco" placeholder="Endereço">
+          <input type="text" id="numero" placeholder="Nº" class="num-input">
+        </div>
+
+        <input type="text" id="bairro" placeholder="Bairro">
+        <input type="text" id="complemento" placeholder="Complemento">
+
+        <div class="arrow-container">
+          <button type="submit" class="arrow-button">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <script type="module" src="../js/cadastroGoogle.js"></script>
+
+
+</body>
+
+</html>

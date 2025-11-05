@@ -1,83 +1,138 @@
-// login.js - Funcionalidades específicas de login
-const API_URL = 'http://localhost:3000';
+// login.js
+// ==========================================
+// 🔹 Login com Firebase (email/senha e Google)
+// 🔹 Recuperar senha com Firebase (pode manter para uso rápido)
+// ==========================================
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loginBtn = document.getElementById('loginBtn');
-    const emailInput = document.getElementById('email');
-    const senhaInput = document.getElementById('senha');
-    const errorMessage = document.getElementById('errorMessage');
+import { auth, provider, db } from "./firebaseConfig.js";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithPopup,
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    // Verifica se os elementos necessários existem na página
-    if (!loginBtn || !emailInput || !senhaInput || !errorMessage) {
-        console.error('Elementos de login não encontrados no DOM.');
-        return;
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("formLogin");
+  const emailInput = document.getElementById("email");
+  const senhaInput = document.getElementById("senha");
+  const msg = document.getElementById("msg");
+  const esqueceuSenha = document.querySelector(".forgot-password");
+  const googleLoginBtn = document.getElementById("googleLoginBtn");
 
-    // Em: login.js
-loginBtn.addEventListener('click', async (e) => {
+  // ==============================
+  // 🔹 LOGIN COM FIREBASE (Email/Senha)
+  // ==============================
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
-    const email = emailInput.value;
+
+    const email = emailInput.value.trim();
     const senha = senhaInput.value;
 
-    errorMessage.style.display = 'none';
-    loginBtn.textContent = 'Entrando...';
-    loginBtn.disabled = true;
+    if (!email || !senha) {
+      msg.textContent = "Preencha todos os campos.";
+      msg.style.color = "red";
+      return;
+    }
+
+    msg.textContent = "Entrando...";
+    msg.style.color = "gray";
 
     try {
-        const response = await fetch(`${API_URL}/api/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, senha }),
-        });
+      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+      const user = userCredential.user;
 
-        // 1. Lê o JSON da resposta (seja sucesso ou erro)
-        const data = await response.json();
+      // Guarda informações básicas
+      localStorage.setItem("usuarioLogado", JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+      }));
 
-        // 2. Verifica se a resposta NÃO foi OK
-        if (!response.ok) {
-            // 3. Lança um erro com a MENSAGEM REAL do servidor
-            throw new Error(data.mensagem || 'Erro desconhecido do servidor');
-        }
+      msg.textContent = "Login realizado com sucesso!";
+      msg.style.color = "green";
 
-        // 4. Salva o TOKEN 
-        localStorage.setItem('token', data.token); 
-        // Salva os dados do usuário
-        localStorage.setItem('usuario', JSON.stringify(data.usuario));
-
-        const { id_usuario, nome, tipo_usuario } = data.usuario;
-        localStorage.setItem('user_id', id_usuario);
-        localStorage.setItem('user_name', nome);
-        localStorage.setItem('user_type', tipo_usuario);
-        
-        // 5. Redireciona 
-        if (tipo_usuario === 'P') {
-            window.location.href = 'tela7_perfil_vendedor.html'; 
-        } else if (tipo_usuario === 'C') {
-            window.location.href = 'home2.html'; 
-        } else {
-            console.warn('Tipo de usuário desconhecido:', tipo_usuario);
-            window.location.href = 'home2.html'; 
-        }
-
+      // Redireciona para página principal
+      setTimeout(() => (window.location.href = "home.html"), 1500);
     } catch (error) {
-        // 6. O CATCH agora recebe a mensagem de erro correta
-        console.error('Erro de login:', error.message);
-        // 7. Exibe a MENSAGEM na tela (ex: "Email ou senha inválidos.")
-        errorMessage.textContent = error.message;
-        errorMessage.style.display = 'block';
-    } finally {
-        loginBtn.textContent = 'Entrar';
-        loginBtn.disabled = false;
-    }
-});
+      console.error("Erro no login:", error);
+      let mensagemErro = "❌ ";
 
-    // Enter para fazer login
-    document.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            loginBtn.click();
+      switch (error.code) {
+        case "auth/user-not-found":
+          mensagemErro += "Usuário não encontrado.";
+          break;
+        case "auth/wrong-password":
+          mensagemErro += "Senha incorreta.";
+          break;
+        case "auth/invalid-email":
+          mensagemErro += "Email inválido.";
+          break;
+        default:
+          mensagemErro += "Erro ao fazer login.";
+      }
+
+      msg.textContent = mensagemErro;
+      msg.style.color = "red";
+    }
+  });
+
+  // ==============================
+  // 🔹 LOGIN COM GOOGLE
+  // ==============================
+  if (googleLoginBtn) {
+    googleLoginBtn.addEventListener("click", async () => {
+      try {
+        provider.setCustomParameters({ prompt: "select_account" });
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        const userData = {
+          uid: user.uid,
+          nome: user.displayName || "",
+          email: user.email || "",
+          foto: user.photoURL || "",
+          tipoUsuario: null,
+          criadoEm: serverTimestamp(),
+        };
+
+        const userRef = doc(db, "usuarios", user.uid);
+        const docSnap = await getDoc(userRef);
+
+        if (docSnap.exists()) {
+          localStorage.setItem("usuarioGoogle", JSON.stringify(userData));
+          window.location.href = "home.html";
+        } else {
+          await setDoc(userRef, userData);
+          localStorage.setItem("usuarioGoogle", JSON.stringify(userData));
+          window.location.href = "perfil.html";
         }
+      } catch (error) {
+        console.error("Erro no login com Google:", error);
+        alert("Erro ao fazer login com o Google. Tente novamente.");
+      }
     });
+  }
+
+  // ==============================
+  // 🔹 ESQUECEU SENHA (Firebase)
+  // ==============================
+  if (esqueceuSenha) {
+    esqueceuSenha.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const email = prompt("Digite seu email para redefinir a senha:");
+      if (!email) return;
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        alert("📧 Email de redefinição de senha enviado!");
+      } catch (error) {
+        alert("❌ Erro: " + error.message);
+      }
+    });
+  }
 });

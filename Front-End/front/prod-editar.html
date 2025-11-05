@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editar Produto - SafraGo</title>
+  <link rel="stylesheet" href="css/vendedor-produto.css">
+  <script type="module" src="js/produto-editar.js" defer></script>
+</head>
+<body>
+  <header><h1>Editar Produto</h1></header>
+
+  <main class="container">
+    <form id="formEditarProduto">
+      <label>Nome do Produto:</label>
+      <input type="text" id="nome" required>
+
+      <label>Descrição:</label>
+      <textarea id="descricao" required></textarea>
+
+      <label>Preço (R$):</label>
+      <input type="number" id="preco" step="0.01" required>
+
+      <label>Categoria:</label>
+      <select id="categoria" required>
+        <option value="">Selecione</option>
+        <option value="hortifruti">Hortifruti</option>
+        <option value="artesanato">Artesanato</option>
+        <option value="laticinios">Laticínios</option>
+        <option value="outros">Outros</option>
+      </select>
+
+      <label>Quantidade disponível:</label>
+      <input type="number" id="quantidade" min="1" required>
+
+      <label>Foto do Produto (substituir):</label>
+      <input type="file" id="imagem" accept="image/*">
+
+      <div id="previewImagem"></div>
+
+      <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <p id="msgStatus"></p>
+  </main>
+</body>
+</html>

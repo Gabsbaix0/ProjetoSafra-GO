@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafraGo - Verificação</title>
+  <link rel="stylesheet" href="verificar.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+  <!-- Fundo -->
+  <div class="background"></div>
+
+  <!-- Container principal -->
+  <div class="container">
+    <!-- Cabeçalho -->
+    <header class="header-tela5">
+      <div class="logo-container-tela5">
+        <img src="../imagens/logo.png" alt="SafraGo" class="logo-tela5" />
+      </div>
+      <div class="nav-container">
+        <a href="cadastro_senha.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+          <span>Voltar</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Cartão de verificação -->
+    <div class="form-card animar">
+      <h2>Verificação de Conta</h2>
+      <p class="descricao">
+        Digite o código de 6 dígitos que enviamos para o seu e-mail cadastrado.
+      </p>
+
+      <form id="formVerificacao">
+        <input
+          id="codigo"
+          type="text"
+          maxlength="6"
+          placeholder="000000"
+          required
+        />
+        <div class="arrow-container-tela5">
+          <button type="submit" class="arrow-button-tela5" id="btnVerificar">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- Mensagem de status -->
+      <p id="mensagem" class="mensagem-animada"></p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/firebaseConfig.js"></script>
+  <script type="module" src="../js/verificar.js"></script>
+</body>
+</html>

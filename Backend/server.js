@@ -9,15 +9,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// --- Middlewares Globais ---
 app.use(cors());
 app.use(express.json());
 
 const db = require('./src/config/db');
 
-// 🔍 Teste de conexão
+// Teste de conexão
 app.get('/testar-conexao', async (req, res) => {
     try {
-        await db.query('SELECT 1 + 1 AS solution');
+        await db.query('SELECT 1 + 1 AS solution'); 
         res.send('Conexão com o MySQL bem-sucedida!');
     } catch (error) {
         console.error('Erro de conexão com o banco de dados:', error.message);
@@ -25,7 +26,9 @@ app.get('/testar-conexao', async (req, res) => {
     }
 });
 
-// --- 🧩 Servir arquivos estáticos ---
+
+
+// Servir arquivos estáticos da pasta Front-End
 // HTML e CSS
 app.use(express.static(path.join(__dirname, '../Front-End/front')));
 
@@ -37,16 +40,19 @@ app.use('/imagens', express.static(path.join(__dirname, '../Front-End/imagens'))
 
 // 🚀 Página inicial → tela de login
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Front-End/front/tela1_login.html'));
+    res.sendFile(path.join(__dirname, '../Front-End/front/login.html'));
 });
-
 // --- Rotas da API ---
+
+// Rota de Autenticação (CADASTRO E LOGIN )
 app.use('/api/auth', require('./src/routes/authRoutes'));
-app.use('/api/usuarios', require('./src/routes/usuarioRoutes'));
-app.use('/api/produtos', require('./src/routes/produtoRoutes'));
-app.use('/api/compradores', require('./src/routes/compradorRoutes'));
-app.use('/api/produtores', require('./src/routes/produtorRoutes'));
-app.use('/api/mensagens', require('./src/routes/mensagemRoutes'));
+
+// Demais rotas
+app.use('/api/usuarios', require('./src/routes/usuarioRoutes')); 
+app.use('/api/produtos', require('./src/routes/produtoRoutes')); 
+app.use('/api/compradores', require('./src/routes/compradorRoutes')); 
+app.use('/api/produtores', require('./src/routes/produtorRoutes')); 
+app.use('/api/mensagens', require('./src/routes/mensagemRoutes')); 
 app.use('/api/favoritos', require('./src/routes/favoritoRoutes'));
 
 // --- Inicialização do servidor ---

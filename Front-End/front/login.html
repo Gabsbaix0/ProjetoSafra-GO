@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafraGo - Login</title>
+  <link rel="stylesheet" href="style-lcs.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <div class="logo-container">
+      <img src="../imagens/logo_safra_go.png" alt="Logo SafraGo" class="logo">
+    </div>
+
+    <div class="form-container">
+
+      <!-- 🔹 Login com formulário -->
+      <form id="formLogin">
+        <p>Digite seu Email</p>
+        <input type="email" id="email" placeholder="Email" required>
+
+        <p>Digite sua Senha</p>
+        <input type="password" id="senha" placeholder="Senha" required>
+
+        <!-- 🔹 Mensagem de status -->
+        <p id="msg" style="text-align:center; margin:10px 0; color:#333;"></p>
+
+        <a href="esqueci-senha.html" class="forgot-password">Esqueceu a senha?</a>
+
+        <!-- 🔹 Botão padrão -->
+        <button type="submit" id="loginBtn" class="btn enter-btn">Entrar</button>
+      </form>
+
+      <!-- 🔹 Divisor -->
+      <div class="divider">
+        <hr class="line">
+        <span class="or-text">ou</span>
+        <hr class="line">
+      </div>
+
+      <!-- 🔹 Login com Google -->
+      <button id="googleLoginBtn" class="btn social-btn google-btn">
+        <img src="../imagens/icone_google.png" alt="Google Icon" class="icon">
+        Continue com o Google
+      </button>
+
+      <!-- 🔹 Login com Telefone (placeholder para futuro uso) -->
+      <button class="btn social-btn phone-btn">
+        <img src="../imagens/telefone.png" alt="Phone Icon" class="icon">
+        Continue com o Telefone
+      </button>
+
+      <p class="no-account">
+        Não possui conta?
+        <a href="perfil.html">Cadastre-se</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- 🔹 Google Sign-In (se necessário) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- 🔹 Firebase -->
+  <script type="module" src="../js/firebaseConfig.js"></script>
+
+  <!-- 🔹 Script Unificado -->
+  <script type="module" src="../js/login.js"></script>
+</body>
+</html>

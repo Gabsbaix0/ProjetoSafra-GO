@@ -1,0 +1,23 @@
+{
+  "name": "atualiza-essg",
+  "version": "1.0.0",
+  "description": "Projeto Laboratorio3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahnnyh/Atualiza-esSG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahnnyh/Atualiza-esSG/issues"
+  },
+  "homepage": "https://github.com/Ahnnyh/Atualiza-esSG#readme",
+  "dependencies": {
+    "firebase": "^12.4.0"
+  }
+}

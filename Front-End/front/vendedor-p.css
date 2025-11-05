@@ -1,0 +1,81 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  header {
+    background-color: #008037;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .card-vendedor {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    gap: 1rem;
+  }
+  
+  .card-vendedor img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #008037;
+  }
+  
+  .titulo-produtos {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    color: #008037;
+  }
+  
+  .grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .card-produto {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1rem;
+    text-align: center;
+    transition: 0.3s;
+  }
+  
+  .card-produto:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-produto img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .card-produto h4 {
+    margin: 0.5rem 0;
+    color: #008037;
+  }
+  
+  .card-produto p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
