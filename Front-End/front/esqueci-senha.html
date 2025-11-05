@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style-lcs.css">
-    <title>SafraGo - Esqueci a Senha</title>
-    <style>
-        /* Estilo básico para centralizar */
-        body { font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; }
-        div { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esqueci Minha Senha | SafraGo</title>
+  <link rel="stylesheet" href="redefinir.css">
 </head>
 <body>
-    <div class="background"></div>
-    <div class="container">
-        <div class="logo-container">
-            <img src="../imagens/logo_safra_go.png" alt="Logo SafraGo" class="logo">
-        <h2>Esqueceu sua senha?</h2>
-        <p>Não se preocupe. Digite seu email abaixo e enviaremos um link para você redefinir sua senha.</p>
-        
-        <form id="forgotForm">
-            <label for="email">Email:</label>
-            <br>
-            <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
-            <br><br>
-            <button type="submit" id="btnEnviar">Enviar Link</button>
-        </form>
-        
-        <p id="message" style="display: none;"></p>
-        
-        <br>
-        <a href="login.html">Voltar para o Login</a>
-    </div>
+  <div class="container">
+    <h2>Redefinir Senha</h2>
+    <p>Digite seu e-mail e enviaremos um link para redefinir sua senha.</p>
 
-    <script src="../js/esqueci.js"></script>
+    <form id="formEsqueci">
+      <input type="email" id="email" placeholder="Digite seu e-mail" required>
+      <button type="submit" id="btnEnviar">Enviar link de redefinição</button>
+    </form>
+
+    <p id="msg"></p>
+
+    <button id="btnReenviar" style="display: none;">Reenviar link</button>
+  </div>
+
+  <script type="module" src="../js/esqueci.js"></script>
 </body>
 </html>
