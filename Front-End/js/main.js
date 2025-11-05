@@ -1,53 +1,64 @@
 // filtros.js - Funcionalidades para o catálogo de produtos - Nova Paleta
+
+// Classe responsável por gerenciar o catálogo de produtos
 class CatalogoManager {
     constructor() {
+        // Lista de produtos (armazenados como objetos)
         this.products = [];
+        // Filtro atual (por padrão mostra todos)
         this.currentFilter = 'all';
+        // Termo de busca digitado pelo usuário
         this.searchTerm = '';
+        // Inicializa o sistema assim que o objeto é criado
         this.init();
     }
 
+    // Método principal de inicialização
     init() {
-        this.cacheElements();
-        this.bindEvents();
-        this.cacheProducts();
-        this.updateProductCount();
+        this.cacheElements();         // Armazena referências aos elementos do DOM
+        this.bindEvents();            // Associa eventos (cliques, scroll, busca)
+        this.cacheProducts();         // Lê e salva dados dos produtos exibidos na página
+        this.updateProductCount();    // Atualiza o contador de produtos visíveis
     }
 
+    // Captura e armazena os elementos do DOM utilizados no catálogo
     cacheElements() {
         this.elements = {
-            filterBtns: document.querySelectorAll('.filter-btn'),
-            searchInput: document.getElementById('searchInput'),
-            productList: document.getElementById('productList'),
-            productCards: document.querySelectorAll('.product-card'),
-            emptyState: document.getElementById('emptyState'),
-            sortSelect: document.getElementById('sortSelect')
+            filterBtns: document.querySelectorAll('.filter-btn'),   // Botões de filtro de categoria
+            searchInput: document.getElementById('searchInput'),    // Campo de busca
+            productList: document.getElementById('productList'),    // Container dos produtos
+            productCards: document.querySelectorAll('.product-card'),// Todos os cards de produto
+            emptyState: document.getElementById('emptyState'),      // Mensagem de "nenhum produto encontrado"
+            sortSelect: document.getElementById('sortSelect')       // Campo de ordenação (preço/nome)
         };
     }
 
+    // Armazena dados estruturados dos produtos existentes no DOM
     cacheProducts() {
         this.products = Array.from(this.elements.productCards).map(card => ({
             element: card,
-            name: card.querySelector('h3').textContent.toLowerCase(),
-            category: card.dataset.category,
-            producer: card.querySelector('.producer').textContent.toLowerCase(),
-            price: this.extractPrice(card)
+            name: card.querySelector('h3').textContent.toLowerCase(), // Nome do produto
+            category: card.dataset.category,                           // Categoria (ex: frutas, legumes)
+            producer: card.querySelector('.producer').textContent.toLowerCase(), // Nome do produtor
+            price: this.extractPrice(card)                             // Preço convertido para número
         }));
     }
 
+    // Extrai e converte o preço de um card em número (float)
     extractPrice(card) {
         const priceText = card.querySelector('.packaging-price')?.textContent || '';
         const priceMatch = priceText.match(/R\$\s*([\d.,]+)/);
         return priceMatch ? parseFloat(priceMatch[1].replace('.', '').replace(',', '.')) : 0;
     }
 
+    // Vincula todos os eventos de interação (cliques, busca, scroll etc.)
     bindEvents() {
-        // Filtros
+        // Filtros de categoria
         this.elements.filterBtns.forEach(btn => {
             btn.addEventListener('click', (e) => this.handleFilterClick(e));
         });
 
-        // Busca com debounce
+        // Busca com debounce (aguarda 300ms antes de filtrar enquanto o usuário digita)
         this.elements.searchInput.addEventListener('input', 
             debounce((e) => {
                 this.searchTerm = e.target.value.toLowerCase().trim();
@@ -55,7 +66,7 @@ class CatalogoManager {
             }, 300)
         );
 
-        // Ordenação
+        // Ordenação por preço ou nome
         if (this.elements.sortSelect) {
             this.elements.sortSelect.addEventListener('change', (e) => {
                 if (e.target.value) {
@@ -64,60 +75,71 @@ class CatalogoManager {
             });
         }
 
-        // Botões de interesse
+        // Clique nos botões "Tenho Interesse"
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn-interesse')) {
                 this.handleInteresseClick(e);
             }
         });
 
-        // Load mais produtos (simulação)
+        // Rolagem da página → simula carregamento de mais produtos
         window.addEventListener('scroll', () => this.handleScroll());
     }
 
+    // Trata o clique em um botão de filtro de categoria
     handleFilterClick(e) {
         const btn = e.currentTarget;
         const filter = btn.dataset.filter;
 
-        // Atualizar botões ativos
+        // Atualiza o estado visual dos botões
         this.elements.filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
+        // Define o filtro atual e aplica os filtros na lista de produtos
         this.currentFilter = filter;
         this.applyFilters();
     }
 
+    // Aplica filtros de categoria + busca nos produtos
     applyFilters() {
         let visibleCount = 0;
 
         this.products.forEach(product => {
+            // Verifica se o produto corresponde ao filtro selecionado
             const matchesFilter = this.currentFilter === 'all' || 
                                 product.category === this.currentFilter ||
                                 (this.currentFilter === 'ofertas' && this.isOferta(product));
 
+            // Verifica se o termo de busca está presente no nome ou produtor
             const matchesSearch = !this.searchTerm || 
                                 product.name.includes(this.searchTerm) ||
                                 product.producer.includes(this.searchTerm);
 
+            // Define se o produto deve ser exibido
             const shouldShow = matchesFilter && matchesSearch;
 
+            // Mostra ou esconde o produto no DOM
             product.element.style.display = shouldShow ? 'block' : 'none';
             
             if (shouldShow) {
                 visibleCount++;
-                this.animateProduct(product.element);
+                this.animateProduct(product.element); // Adiciona animação suave
             }
         });
 
+        // Mostra mensagem se nenhum produto foi encontrado
         this.toggleEmptyState(visibleCount === 0);
+
+        // Atualiza o contador de produtos visíveis
         this.updateProductCount(visibleCount);
     }
 
+    // Determina se o produto é uma oferta (preço abaixo de R$100)
     isOferta(product) {
-        // Produtos com preço abaixo de 100 são considerados ofertas
         return product.price > 0 && product.price < 100;
     }
 
+    // Aplica uma animação de entrada nos produtos filtrados
     animateProduct(element) {
         element.style.animation = 'none';
         setTimeout(() => {
@@ -125,6 +147,7 @@ class CatalogoManager {
         }, 10);
     }
 
+    // Mostra ou oculta o estado vazio ("nenhum produto encontrado")
     toggleEmptyState(show) {
         if (this.elements.emptyState) {
             this.elements.emptyState.style.display = show ? 'block' : 'none';
@@ -132,6 +155,7 @@ class CatalogoManager {
         }
     }
 
+    // Atualiza o contador de produtos no banner principal
     updateProductCount(count) {
         const total = count || this.products.length;
         const banner = document.querySelector('.banner-text');
@@ -140,27 +164,28 @@ class CatalogoManager {
         }
     }
 
+    // Ordena os produtos conforme o critério selecionado
     sortProducts(criteria) {
         const sortedProducts = [...this.products].sort((a, b) => {
             switch (criteria) {
-                case 'price-asc':
+                case 'price-asc':  // Menor preço primeiro
                     return a.price - b.price;
-                case 'price-desc':
+                case 'price-desc': // Maior preço primeiro
                     return b.price - a.price;
-                case 'name':
+                case 'name':       // Ordem alfabética
                     return a.name.localeCompare(b.name);
                 default:
                     return 0;
             }
         });
 
-        // Reordenar no DOM
+        // Reorganiza os produtos no DOM conforme a nova ordem
         const container = this.elements.productList;
         sortedProducts.forEach(product => {
             container.appendChild(product.element);
         });
 
-        // Reaplicar animação
+        // Reaplica animação de entrada em sequência
         sortedProducts.forEach((product, index) => {
             setTimeout(() => {
                 this.animateProduct(product.element);
@@ -168,16 +193,18 @@ class CatalogoManager {
         });
     }
 
+    // Trata o clique em "Tenho Interesse"
     handleInteresseClick(e) {
         e.preventDefault();
         const productCard = e.target.closest('.product-card');
         const productName = productCard.querySelector('h3').textContent;
         
+        // Exibe um modal de confirmação elegante
         this.showInteresseModal(productName);
     }
 
+    // Cria e exibe o modal de confirmação de interesse
     showInteresseModal(productName) {
-        // Criar modal de confirmação
         const modal = document.createElement('div');
         modal.style.cssText = `
             position: fixed;
@@ -193,6 +220,7 @@ class CatalogoManager {
             animation: fadeIn 0.3s ease;
         `;
 
+        // HTML interno do modal (mensagem e botão "Entendi")
         modal.innerHTML = `
             <div style="
                 background: #F5FCF8;
@@ -225,16 +253,17 @@ class CatalogoManager {
             </div>
         `;
 
+        // Adiciona o modal ao documento
         document.body.appendChild(modal);
 
-        // Fechar modal ao clicar fora
+        // Permite fechar o modal clicando fora da caixa
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.remove();
             }
         });
 
-        // Adicionar estilo de animação se não existir
+        // Cria o estilo da animação se ainda não existir
         if (!document.querySelector('#modal-styles')) {
             const style = document.createElement('style');
             style.id = 'modal-styles';
@@ -254,8 +283,8 @@ class CatalogoManager {
         }
     }
 
+    // Detecta scroll próximo ao fim da página e simula carregamento de novos produtos
     handleScroll() {
-        // Simulação de carregamento de mais produtos
         const scrollPosition = window.innerHeight + window.scrollY;
         const pageHeight = document.documentElement.scrollHeight;
         
@@ -264,16 +293,17 @@ class CatalogoManager {
         }
     }
 
+    // Simula o carregamento de mais produtos (exemplo visual)
     loadMoreProducts() {
-        // Simulação - na implementação real, aqui você faria uma requisição AJAX
         this.loadingMore = true;
         
-        // Mostrar loading
+        // Mostra um elemento de "carregando"
         const loadingElement = document.createElement('div');
         loadingElement.className = 'loading';
         loadingElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando mais produtos...';
         this.elements.productList.appendChild(loadingElement);
         
+        // Após 1 segundo, remove o loading (simulação)
         setTimeout(() => {
             loadingElement.remove();
             console.log('Carregando mais produtos...');
@@ -282,15 +312,18 @@ class CatalogoManager {
     }
 }
 
-// Inicialização quando o DOM estiver carregado
+// Inicializa o catálogo assim que o DOM for carregado
 document.addEventListener('DOMContentLoaded', function() {
     const catalogoManager = new CatalogoManager();
-    
-    // Expor para uso global se necessário
+    // Torna o gerenciador acessível globalmente (para depuração, se necessário)
     window.catalogoManager = catalogoManager;
 });
 
+// ======================
 // Funções utilitárias globais
+// ======================
+
+// Formata um número como moeda em Real (R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', {
         style: 'currency',
@@ -298,6 +331,7 @@ function formatCurrency(value) {
     }).format(value);
 }
 
+// Função debounce — evita execuções repetidas em eventos contínuos (como digitar ou rolar)
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -310,7 +344,7 @@ function debounce(func, wait) {
     };
 }
 
-// Adicionar ícone de loading se não existir
+// Adiciona estilo CSS para o ícone de loading, se ainda não existir
 if (!document.querySelector('#loading-styles')) {
     const style = document.createElement('style');
     style.id = 'loading-styles';
